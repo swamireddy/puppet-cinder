@@ -18,11 +18,16 @@
 #   (optional) Default driver to use for quota checks.
 #   Defaults to 'cinder.quota.DbQuotaDriver'.
 #
+# [*use_default_quota_class]
+#   (optional) whether to use default quota class for default quota.
+#   Default to False
+#
 class cinder::quota (
   $quota_volumes = 10,
   $quota_snapshots = 10,
   $quota_gigabytes = 1000,
-  $quota_driver = 'cinder.quota.DbQuotaDriver'
+  $quota_driver = 'cinder.quota.DbQuotaDriver',
+  $use_default_quota_class = False
 ) {
 
   cinder_config {
@@ -30,5 +35,6 @@ class cinder::quota (
     'DEFAULT/quota_snapshots': value => $quota_snapshots;
     'DEFAULT/quota_gigabytes': value => $quota_gigabytes;
     'DEFAULT/quota_driver':    value => $quota_driver;
+    'DEFAULT/use_default_quota_class': value => $use_default_quota_class;
   }
 }
